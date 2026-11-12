@@ -1,130 +1,205 @@
-# 🎬 Coquette Discord Movie & Video Streamer
+<div align="center">
 
-A high-performance, cross-platform Discord Media Streamer bot that streams **Cinejoy movies, TV series, and web videos** directly into Discord Voice & Video channels in **100% borderless full screen** at **480p 24 FPS** with ultra-low CPU utilization.
+<img src="./assets/banner.gif" alt="Discord Movie Stream Bot" width="100%" />
 
-Works out of the box on **Windows 10 / 11** and **any Linux VPS (Ubuntu / Debian, x86_64 & ARM64)**.
+# 𝜗𝜚 Discord Movie & Video Streamer
 
----
+**♡ A high-performance, cross-platform Discord Media Streamer bot that broadcasts movies, TV series, and web videos directly into voice channels with 100% borderless fullscreen playback and minimal CPU utilization.**
 
-## ⚡ Quick Start: Windows (1-Click)
+*Built for Windows 10/11 & Linux VPS (Ubuntu/Debian x86_64 & ARM64)*
 
-### 1. Requirements
-- [Node.js v18+](https://nodejs.org/) installed.
-- (Optional) [FFmpeg](https://ffmpeg.org/download.html) in your Windows PATH.
+<img src="./assets/divider.gif" width="100%" />
 
-### 2. Run the Bot
-- **First Time Setup**: Double-click `setup_windows.bat`  
-  *(Installs npm dependencies, Playwright Chromium, and sets up `.env`)*
+</div>
+
+## ✦ Live Previews
+
+<div align="center">
+
+<table>
+  <tr>
+    <th width="50%" align="center">𝜗𝜚 Search & Stream Card (Components V2)</th>
+    <th width="50%" align="center">✦ Live Playback in Voice Channel</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="./assets/search_command.jpg" alt="Search Command Preview" width="100%" style="border-radius: 8px;" />
+      <br>
+      <sub>• Interactive TMDB movie cards with poster, rating, synopsis & 1-click Stream buttons</sub>
+    </td>
+    <td align="center">
+      <img src="./assets/streaming_in_vc.jpg" alt="Streaming in VC Preview" width="100%" style="border-radius: 8px;" />
+      <br>
+      <sub>• 100% borderless full-screen capture in Discord Voice & Video (720p/480p)</sub>
+    </td>
+  </tr>
+</table>
+
+<img src="./assets/divider.gif" width="100%" />
+
+</div>
+
+## ╭── 𝜗𝜚 Core Features
+
+- **♡ Discord Components V2 UI**: Modern interactive message cards with posters, release dates, ratings, overview, and one-click stream buttons for top and similar matches.
+- **✦ 100% Borderless Fullscreen**: Launches Chromium in application kiosk mode with zero window borders, URL bars, or browser tabs. Automatically expands the HTML5 video element to fill the canvas.
+- **⨾𓍢ִ໋ Voice Channel Auto-Detection**: Automatically detects which voice channel you are sitting in and joins it immediately, with a fallback to `.public`.
+- **✧ Direct & Search Streaming**:
+  - Direct TMDB numeric ID (`.stream 969681` or `.stream 1396`)
+  - Direct video URLs (`.stream https://...`)
+  - Title keyword search (`.movie inception` or `.stream avatar`)
+- **ᝰ.ᐟ Featherlight CPU Footprint**:
+  - Single-threaded rasterization & single-threaded FFmpeg encoding to prevent CPU contention on budget 1–2 vCPU VPS instances.
+  - Freezes Discord Web background DOM elements and silences duplicate preview decoders.
+- **✦ Rock-Solid Audio Sync**: WebRTC audio loopback capture on Windows, and PulseAudio virtual sink routing (`Virtual_Sink.monitor` -> `Virtual_Mic`) on Linux.
+
+<img src="./assets/divider.gif" width="100%" />
+
+## ╭── ✧ Discord Bot Commands
+
+| Command | Syntax Example | Description |
+|:---|:---|:---|
+| `.movie` | `.movie spiderman` | Searches TMDB and displays interactive cards with one-click **Stream** buttons. |
+| `.stream` | `.stream 969681` | Streams directly by TMDB movie or TV series numeric ID. |
+| `.stream` | `.stream <url>` | Streams any custom video link (YouTube, Cinejoy, HTML5 player). |
+| `.stream` | `.stream breaking bad` | Searches for title and immediately streams the top match in voice. |
+| `.stream stop` | `.stream stop` | Cleanly leaves voice channel, closes the browser instance, and frees system resources. |
+| `.help` | `.help` | Displays the interactive Components V2 commands menu. |
+
+<img src="./assets/divider.gif" width="100%" />
+
+## ╭── ⨾𓍢ִ໋ Quick Start: Windows (1-Click)
+
+### 1. Prerequisites
+- **Node.js v18+** installed on your system.
+- (Optional) **FFmpeg** added to your system PATH.
+
+### 2. Launch
+- **First-Time Setup**: Double-click `setup_windows.bat`  
+  *(Installs npm dependencies, Playwright Chromium, and initializes `.env`)*
 - **Start Bot**: Double-click `start.bat`  
-  *(Launches the Discord bot. Users can use `.movie <title>` and `.stream <id>` in Discord)*
+  *(Starts the Discord bot client. Users can run `.movie <query>` in any server channel)*
 - **Direct Stream (No Bot)**: Double-click `run.bat`  
-  *(Instantly streams a movie URL into voice)*
+  *(Instantly launches browser streaming without waiting for chat commands)*
 
----
+<img src="./assets/divider.gif" width="100%" />
 
-## 🚀 Quick Start: Any Linux VPS (1-Click Setup)
+## ╭── ᝰ.ᐟ Quick Start: Linux VPS (Ubuntu / Debian)
 
-To deploy on any fresh Ubuntu/Debian VPS (Oracle Cloud, DigitalOcean, Hetzner, AWS, etc.):
+Automated one-command setup for fresh Oracle Cloud, DigitalOcean, Hetzner, AWS, or Contabo VPS instances:
 
-1. Upload this folder to your VPS (e.g. `/opt/discord-streamer/`).
-2. Run the automated installer:
-   ```bash
-   bash setup_vps.sh
-   ```
-   **What `setup_vps.sh` does automatically:**
-   - Installs FFmpeg, Xvfb virtual display, and PulseAudio virtual audio sink.
-   - Installs Node.js LTS and PM2 process manager.
-   - Installs npm packages and Playwright Chromium.
-   - Configures audio loopback (`Virtual_Sink` -> `Virtual_Mic`).
-   - Starts the bot under PM2 with automatic crash recovery & reboot persistence.
+```bash
+# 1. Clone repository
+git clone https://github.com/akashsuu/Discord-movie-stream-bot.git /opt/discord-stream-bot
+cd /opt/discord-stream-bot
 
-3. Useful VPS Management Commands:
-   ```bash
-   pm2 status                          # View bot process status
-   pm2 logs discord-stream-bot        # View live logs
-   pm2 restart discord-stream-bot     # Restart bot
-   pm2 stop discord-stream-bot        # Stop bot
-   bash monitor.sh -w                  # Live CPU, RAM & Stream monitor
-   ```
+# 2. Run automated VPS installer
+bash setup_vps.sh
+```
 
----
+### What `setup_vps.sh` Configures Automatically:
+- Installs Node.js LTS, FFmpeg, Xvfb virtual display, and PulseAudio.
+- Creates and connects virtual audio loopback sinks (`Virtual_Sink` & `Virtual_Mic`).
+- Installs project dependencies and Playwright Chromium binaries.
+- Configures PM2 daemon management with automatic boot persistence and restart recovery.
 
-## 🎮 Discord Bot Commands
+### VPS Process Management:
+```bash
+pm2 status                          # View process status
+pm2 logs discord-stream-bot        # View live output logs
+pm2 restart discord-stream-bot     # Restart stream bot
+pm2 stop discord-stream-bot        # Stop stream bot
+bash monitor.sh -w                  # Real-time CPU, RAM & Stream monitor
+```
 
-| Command | Example | Description |
-|---|---|---|
-| `.movie <query>` | `.movie inception` | Searches TMDB for movies/shows and displays rich cards with **one-click Stream buttons**. |
-| `.stream <tmdb_id>` | `.stream 969681` | Streams directly by TMDB movie or TV series ID. |
-| `.stream <url>` | `.stream https://...` | Streams any custom Cinejoy or HTML5 video link. |
-| `.stream <name>` | `.stream spider man` | Searches and streams the top matching title directly. |
-| `.stream stop` | `.stream stop` | Leaves voice channel, closes the stream browser, and frees CPU. |
-| `.help` | `.help` | Displays the interactive help menu. |
+<img src="./assets/divider.gif" width="100%" />
 
----
+## ╭── ✦ Environment Configuration (`.env`)
 
-## ⚙️ Configuration (`.env`)
-
-Edit `.env` (or copy `.env.example` to `.env`) with your tokens:
+Copy `.env.example` to `.env` and fill in your Discord credentials:
 
 ```env
 # Discord Application Bot Token (from Discord Developer Portal)
-BOT_TOKEN=your_bot_token_here
+BOT_TOKEN=your_discord_bot_token_here
 
-# User/Self Token (used by headless browser to join voice and share screen)
-USER_TOKEN=your_user_token_here
+# User/Self Token (used by the browser engine to join voice and share screen)
+USER_TOKEN=your_discord_user_token_here
 
-# Target Server & Voice Channel
+# Target Server (Guild) & Default Voice Channel IDs
 GUILD_ID=1474805625018913043
 VOICE_CHANNEL_ID=1499087387320651919
 
-# Prefix for bot commands (default: .)
+# Command Prefix
 PREFIX=.
 
-# TMDB API Key (default free key included)
+# TMDB API Key (v3 authentication key)
 TMDB_API_KEY=15d2ea6d0dc1d476efbca3eba2b9bbfb
+
+# Optional: HTTP/HTTPS proxy URLs for TMDB (comma-separated, for regions where api.themoviedb.org is blocked)
+TMDB_PROXIES=
+
+# Display & Headless Mode (Set false for Discord tab capture and video decoding)
+DISPLAY=:99
+PULSE_SINK=Virtual_Sink
+BROWSER_PATH=/usr/bin/chromium
+HEADLESS=false
+TAB_CAPTURE_KEYWORD=Stream
+USER_DATA_DIR=./browser-profile
 ```
 
----
+<img src="./assets/divider.gif" width="100%" />
 
-## 📁 Project Directory Structure
+## ╭── ✧ Project Structure
 
 ```
-stream bot/
+Discord-movie-stream-bot/
+├── assets/
+│   ├── banner.gif          # Header aesthetic animation
+│   ├── divider.gif         # Animated section line divider
+│   ├── search_command.jpg  # Preview: .movie TMDB Components V2 card
+│   └── streaming_in_vc.jpg # Preview: Voice channel borderless stream
 ├── commands/
-│   ├── help.js             # .help command
+│   ├── help.js             # .help Components V2 guide
 │   ├── movie.js            # .movie TMDB search & stream cards
-│   └── stream.js           # .stream launch & controls
-├── .env                    # Active credentials (tokens, channel IDs)
-├── .env.example            # Template credentials
-├── bot.js                  # Main Discord.js bot client
-├── config.js               # Cross-platform config loader
-├── ecosystem.config.js     # PM2 cluster configuration
-├── login.js                # Unified launcher (bot mode, stream mode, setup mode)
+│   └── stream.js           # .stream process manager & controls
+├── .env.example            # Credentials template
+├── config.example.json     # JSON config template
+├── config.js               # Cross-platform config resolver
+├── bot.js                  # Main Discord.js client & button dispatcher
 ├── streamlogic.js          # Playwright & FFmpeg 100% fullscreen engine
-├── setup_windows.bat       # 1-click Windows setup script
-├── start.bat               # 1-click Windows bot launcher
-├── run.bat                 # 1-click Windows direct streamer
+├── login.js                # Unified CLI launcher
+├── ecosystem.config.js     # PM2 process configuration
+├── setup_windows.bat       # 1-click Windows installer
+├── start.bat               # 1-click Windows launcher
+├── run.bat                 # 1-click direct stream launcher
 ├── setup_vps.sh            # 1-click Linux VPS installer
-├── start.sh                # Linux VPS launcher
-├── monitor.sh              # Real-time resource & process monitor
-├── benchmark.sh            # 25-second performance benchmark tool
-└── package.json            # Project dependencies
+├── start.sh                # Linux VPS execution wrapper
+├── monitor.sh              # Live resource monitoring tool
+├── benchmark.sh            # 25-second CPU & playback benchmark
+├── package.json            # Project dependencies & scripts
+└── LICENSE                 # MIT License
 ```
 
----
+<img src="./assets/divider.gif" width="100%" />
 
-## 🌟 Key Performance & Fullscreen Features
+## ╭── 𝜗𝜚 Technical Fullscreen Architecture
 
-1. **100% Borderless Fullscreen**:
-   - Launches in Chromium Application Kiosk Mode (`--app`, `--start-fullscreen`, `--kiosk`).
-   - Zero Chrome tabs, zero address bars, zero buttons, and zero window borders.
-   - Automatically hides HTML5 player controls and progress bars.
+1. **Chromium Application Kiosk Mode**:
+   - Launches via `--app`, `--start-fullscreen`, and `--kiosk` flags.
+   - Eliminates window borders, toolbars, navigation buttons, and scrollbars entirely.
+2. **Dynamic HTML5 Video Maximization**:
+   - Injects custom CSS rules directly into the target media frame (`position: fixed; width: 100vw; height: 100vh; z-index: 2147483647`).
+   - Automatically conceals player control bars and buffering spinners during streaming.
+3. **Optimized Resource Consumption**:
+   - Limits browser rasterization threads to 1 (`--num-raster-threads=1`).
+   - Limits FFmpeg video encoding to 1 thread (`-threads 1`).
+   - Suspends Discord client background canvas re-renders to prevent redundant GPU and CPU cycles.
 
-2. **Featherlight CPU Optimization**:
-   - Capped at 1 software raster thread (`--num-raster-threads=1`) and 1 FFmpeg thread (`-threads 1`).
-   - Eliminates process contention on 2-vCPU VPS instances.
-   - React UI in Discord Web is frozen (`visibility: hidden`) and local self-preview `<video>` tags are paused to eliminate duplicate decoding.
+<img src="./assets/divider.gif" width="100%" />
 
-3. **Rock-Solid Audio Sync**:
-   - Linux: PulseAudio virtual sink loopback (`Virtual_Sink.monitor` -> `Virtual_Mic`).
-   - Windows: Direct WebRTC audio capture from browser media stream.
+<div align="center">
+
+**𝜗𝜚 Discord Movie & Video Streamer**  
+*Maintained by akashsuu  ·  Licensed under MIT*
+
+</div>
