@@ -1,0 +1,34 @@
+{
+  "name": "coquette-discord-streamer",
+  "version": "1.0.0",
+  "description": "Discord Voice Movie & Video Stream Bot - Cross-Platform (Windows & Linux VPS)",
+  "main": "login.js",
+  "scripts": {
+    "start": "node login.js",
+    "bot": "node bot.js",
+    "stream": "node login.js stream",
+    "setup": "node login.js setup",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop discord-stream-bot",
+    "pm2:restart": "pm2 restart discord-stream-bot",
+    "pm2:logs": "pm2 logs discord-stream-bot"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "stream",
+    "voice",
+    "playwright",
+    "cinejoy",
+    "xvfb"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.1",
+    "undici": "^6.21.0",
+    "ws": "^8.18.0"
+  }
+}

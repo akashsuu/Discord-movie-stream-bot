@@ -1,0 +1,52 @@
+# ==============================================================================
+#  GITIGNORE - DISCORD MOVIE STREAM BOT
+# ==============================================================================
+
+# Credentials & environment secrets
+.env
+.env.local
+.env.*.local
+config.json
+
+# Keep example templates tracked
+!.env.example
+!config.example.json
+
+# Proxy lists containing auth credentials
+data/proxies.json
+proxies.json
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Browser user data profiles & session caches
+browser-profile/
+chrome_discord_profile/
+playwright_discord_profile/
+Default/
+GPUCache/
+Crashpad/
+
+# Archive files
+*.zip
+*.rar
+*.tar
+*.tar.gz
+*.7z
+
+# Process ID, temporary & log files
+*.pid
+*.log
+streamer.pid
+output.log
+error.log
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
